@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  app:
+    build: ./
+    links:
+    - pubsub
+    depends_on:
+    - pubsub
+    environment:
+    - GOOGLE_CLOUD_PROJECT=issue
+    - PUBSUB_EMULATOR_HOST=pubsub:8085
+  pubsub:
+    build:
+      context: ./
+      dockerfile: Dockerfile.pubsub
