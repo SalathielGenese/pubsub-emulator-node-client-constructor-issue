@@ -1,0 +1,6 @@
+FROM google/cloud-sdk:alpine
+RUN mkdir -p /var/pubsub && \
+    apk add --no-cache openjdk7-jre && \
+    gcloud components install --quiet beta pubsub-emulator
+ENTRYPOINT [ "gcloud", "beta", "emulators", "pubsub", "start" ]
+CMD [ "--data-dir=/var/pubsub", "--host-port=0.0.0.0:8085", "--log-http", "--verbosity=debug", "--user-output-enabled" ]
